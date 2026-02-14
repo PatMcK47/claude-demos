@@ -1,0 +1,272 @@
+======================================================================
+SFS PUMF — Dataset Overview & Exploratory Data Analysis Report
+======================================================================
+
+Source: Statistics Canada, Survey of Financial Security (SFS)
+         Public Use Microdata File (PUMF)
+Catalogue: 13M0006X
+Licence:   Statistics Canada Open Licence
+Latest available PUMF: 2019 reference year (released 2021)
+Upcoming: 2023 reference year (available via UBC Abacus Dataverse)
+
+----------------------------------------------------------------------
+1. UNIT OF OBSERVATION
+----------------------------------------------------------------------
+
+  The unit of observation is the ECONOMIC FAMILY UNIT.
+
+  An economic family is defined as a group of two or more persons who
+  live in the same dwelling and are related by blood, marriage,
+  common-law union, or adoption. Persons living alone or with
+  unrelated others are treated as "unattached individuals" — each
+  constituting a separate record.
+
+  Every row in the PUMF represents one family unit. Individual-level
+  data (age, sex, education of the major income earner) is rolled up
+  to the family-unit level. The file does not contain person-level
+  records.
+
+  Approximate PUMF sample size: ~10,400 family units (2019 cycle).
+  Estimated target population:  ~15.6 million Canadian family units.
+
+----------------------------------------------------------------------
+2. PURPOSE OF DATA COLLECTION
+----------------------------------------------------------------------
+
+  The SFS collects information on the assets, debts, employment,
+  income, and education of Canadian families. Its stated purpose is
+  to provide a comprehensive picture of the net worth — or financial
+  health — of Canadians.
+
+  Key policy uses include:
+    - Measuring wealth inequality across demographic groups
+    - Assessing the financial preparedness of Canadians for retirement
+    - Understanding household indebtedness and financial vulnerability
+    - Tracking the distribution of assets and debts over time
+    - Informing housing, pension, and social policy
+
+  The SFS is conducted every three years (2016, 2019, 2023, ...).
+  It is a voluntary survey with a response rate of roughly 43–70%
+  depending on the cycle.
+
+----------------------------------------------------------------------
+3. KEY VARIABLES
+----------------------------------------------------------------------
+
+The PUMF contains approximately 100 variables. Below are the key
+substantive variables organized by category. Variable names follow
+the PUMF naming convention (prefix "P" = PUMF-level).
+
+--- A. Survey Weight ---
+
+  PWEIGHT           Survey (sampling) weight — must be applied for
+                    population-representative estimates. Each record's
+                    weight indicates how many family units in the
+                    population that record represents.
+
+--- B. Geography ---
+
+  PPROVRES          Province of residence (10 provinces; territories
+                    excluded from the survey frame)
+  PREGION           Region of residence (grouped provinces for
+                    disclosure protection)
+
+--- C. Demographics of the Major Income Earner ---
+
+  PEFMJSEX          Sex of the major income earner
+  PEFMJAGE          Age of the major income earner (continuous)
+  PAGEMIEG           Age group (categorical)
+  PEDUCMIE           Highest level of education
+  PMATSTAT           Marital status
+  PIMMIG             Immigration status (recent cycles)
+  PMTHERLN           Mother tongue
+
+--- D. Family Characteristics ---
+
+  PEFSIZE           Economic family size (number of persons)
+  PFMTYPG           Family type (couple with/without children,
+                    lone parent, unattached individual)
+  PNBREAR           Number of income earners
+
+--- E. Income ---
+
+  PFMTINC           Total family (market) income
+  PEFATINC           After-tax family income
+  PFEMPLOY           Employment income
+  PFINCOME           Investment/financial income
+  PGVTRANS           Government transfer income
+  PFMINCG            Family income group (categorical)
+
+--- F. Assets —  Non-Financial ---
+
+  PWAPRVAL           Value of principal residence
+  PWASTRST           Value of other real estate (cottages, rental
+                     properties, land)
+  PWAVHCLE           Value of vehicles
+  PWABUSEQ           Business equity
+  PWACNTNT           Household contents and personal effects
+
+--- G. Assets — Financial ---
+
+  PATDEP             Bank deposits (chequing, savings, GICs)
+  PATRRSP            RRSPs (Registered Retirement Savings Plans)
+  PATRRIF            RRIFs (Registered Retirement Income Funds)
+  PATTFSA            TFSAs (Tax-Free Savings Accounts; 2012+)
+  PATRESP            RESPs (Registered Education Savings Plans)
+  PATSTCK            Stocks (publicly traded)
+  PATMUTF            Mutual funds / investment funds (non-registered)
+  PATEPP             Employer pension plan (RPP) value
+
+--- H. Asset Totals ---
+
+  PATOTAST / PWASTTOT   Total assets (financial + non-financial)
+  PATFEQ                Total financial assets
+  PATNFEQ               Total non-financial assets
+
+--- I. Debts ---
+
+  PDTMRPR            Mortgage on principal residence
+  PDTMORE            Mortgage on other real estate
+  PDTVHCLE           Vehicle loans
+  PDTSLOA            Student loans
+  PDTCRCL            Credit card debt (outstanding balance)
+  PDTLOC             Line of credit balance
+  PDTBUS             Business debts
+  PDTOTHER           Other debts (taxes owing, past-due bills)
+  PDTTOTDT           Total debts
+
+--- J. Net Worth ---
+
+  PWNETWPG           Net worth, going-concern basis
+  PWNETWPT           Net worth, termination basis
+  PNTWRTHQ           Net worth quintile (categorical)
+  PNTWRTHD           Net worth decile (categorical)
+
+  Note: "Going-concern" values employer pensions assuming the plan
+  continues; "termination" values them as if the plan wound up today.
+
+--- K. Housing ---
+
+  POWNRENT           Home ownership status (owner vs. renter)
+  PPRSTYPE           Dwelling type
+  PPRSYRAQ           Year principal residence was acquired
+  PPRSDOWN           Down payment on principal residence
+
+--- L. Financial Attitudes & Behaviours ---
+
+  PFINSITX           Expected financial situation (better/same/worse)
+  PSAVHAB            Saving habits / net saver indicator
+  PFINSTRS           Financial stress indicator
+
+----------------------------------------------------------------------
+4. DESCRIPTIVE STATISTICS (from published sources, 2019 & 2023)
+----------------------------------------------------------------------
+
+The following statistics are drawn from The Daily (Statistics Canada)
+and published analyses. For full weighted tabulations from the
+microdata, run:  python3 eda.py  (after downloading the data).
+
+--- A. Net Worth Distribution (2019 reference year) ---
+
+  Statistic                          Value
+  ─────────────────────────────────────────────────
+  Median family net worth            $329,900
+  Mean family net worth              $835,200
+  Bottom quintile median net worth   $    900
+  Top quintile median net worth      $1,416,000
+  Gini coefficient (net worth)       ~0.73
+
+--- B. Net Worth Distribution (2023 reference year) ---
+
+  Statistic                          Value
+  ─────────────────────────────────────────────────
+  Median family net worth            $398,800
+  Mean family net worth              $1,028,900
+  Change in median (2019→2023)       +20.9%
+
+--- C. Asset Composition (2019, median values among holders) ---
+
+  Asset type                         Median among holders
+  ─────────────────────────────────────────────────
+  Principal residence                $375,000
+  Other real estate                  $250,000
+  Employer pension plans             $203,100
+  RRSPs                              $ 60,000
+  TFSAs                              $ 19,000
+  Vehicles                           $ 15,000
+  Bank deposits                      $  8,000
+  Non-registered investments         $ 25,000
+
+--- D. Debt Composition (2019, median values among holders) ---
+
+  Debt type                          Median among holders
+  ─────────────────────────────────────────────────
+  Mortgage (principal residence)     $180,000
+  Line of credit                     $ 15,000
+  Vehicle loan                       $ 18,000
+  Student loan                       $ 15,000
+  Credit card balance                $  3,000
+
+--- E. Key Demographic Breakdowns (2019) ---
+
+  Homeownership rate:                ~63% of family units
+  Families with mortgage debt:       ~37%
+  Families with any debt:            ~72%
+  Median net worth by age of MIE:
+      Under 35:                      $ 48,800
+      35–44:                         $234,400
+      45–54:                         $521,200
+      55–64:                         $690,000
+      65+:                           $543,200
+
+--- F. Sample Design Notes ---
+
+  Survey year    Initial sample (dwellings)   Response rate
+  ─────────────────────────────────────────────────
+  2019           ~20,000                       ~65%
+  2023           ~39,500                       ~43%
+
+  The 2023 cycle moved from in-person interviews (CAPI) to a
+  self-completed electronic questionnaire (EQ), which contributed
+  to a lower response rate.
+
+----------------------------------------------------------------------
+5. NOTES ON USING THE PUMF
+----------------------------------------------------------------------
+
+  - Always apply the survey weight (PWEIGHT) for population estimates.
+  - The PUMF does NOT include bootstrap weights; use CV guidelines
+    and minimum cell sizes (n >= 25) for reliability assessment.
+  - Some variables are top-coded or grouped for disclosure protection.
+  - For full-detail microdata with bootstrap weights, apply to a
+    Statistics Canada Research Data Centre (RDC).
+
+----------------------------------------------------------------------
+6. HOW TO GENERATE FULL STATISTICS FROM THE MICRODATA
+----------------------------------------------------------------------
+
+  Step 1 — Download the data:
+      cd sfs && python3 download_sfs_pumf.py
+
+  Step 2 — Run the EDA script:
+      python3 eda.py
+
+  The eda.py script will:
+    - Auto-detect the CSV/TXT data file in sfs/data/
+    - Print unweighted and weighted descriptive statistics
+    - Generate frequency tables for demographic variables
+    - Overwrite this report file with results from the actual data
+
+======================================================================
+Sources
+======================================================================
+  - Statistics Canada, The Daily, Oct 29, 2024: "Survey of Financial
+    Security, 2023"
+  - Statistics Canada, Catalogue 13M0006X (SFS PUMF)
+  - Open Government Portal dataset 11aecdcb-8bec-4dbe-9da2-3b0cc4e740c9
+  - Fraser Institute, "Wealth Inequality Revisited" (2025)
+  - StatCan IMDB, SDDS 2620
+
+======================================================================
+END OF REPORT
+======================================================================

@@ -23,29 +23,25 @@ import urllib.error
 #
 # release_suffix encodes the publication year + issue (e.g., 2021001 = 2021, issue 1)
 RELEASES = [
+    # 2023 — speculative URL; the PUMF may not yet be on statcan.gc.ca
     {
         "survey_year": 2023,
         "release_suffix": "2025001",
-        "zip_filename": "SFS2023_PUMF_E.zip",
+        "zip_filename": "SFS2023__PUMF_E.zip",
         "description": "SFS 2023 PUMF (estimated release 2025)",
     },
     {
         "survey_year": 2023,
         "release_suffix": "2025001",
-        "zip_filename": "SFS2023__PUMF_E.zip",  # double underscore variant
-        "description": "SFS 2023 PUMF (double-underscore variant)",
+        "zip_filename": "SFS2023_PUMF_E.zip",
+        "description": "SFS 2023 PUMF (single-underscore variant)",
     },
+    # 2019 — confirmed URL from Open Government Portal & canpumf R package
     {
         "survey_year": 2019,
         "release_suffix": "2021001",
-        "zip_filename": "SFS2019__PUMF_E.zip",
+        "zip_filename": "SFS2019__PUMF_E.zip",  # double underscore is canonical
         "description": "SFS 2019 PUMF (released 2021)",
-    },
-    {
-        "survey_year": 2019,
-        "release_suffix": "2021001",
-        "zip_filename": "SFS2019_PUMF_E.zip",  # single underscore variant
-        "description": "SFS 2019 PUMF (single-underscore variant)",
     },
 ]
 
